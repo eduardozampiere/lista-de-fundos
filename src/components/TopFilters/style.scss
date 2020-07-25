@@ -1,0 +1,30 @@
+.top-filter {
+  margin-top: 10px;
+  box-shadow: 0 0 4px #ccc !important;
+  border-radius: 4px !important;
+  .filter-body {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f4f4f4;
+    margin: 0 15px 20px 15px;
+    padding-top: 18px;
+  }
+
+  input[type="text"] {
+    border: none;
+    border-bottom: 1px solid var(--dark);
+    background-color: var(--light);
+    color: var(--dark);
+    width: 50%;
+    margin-left: 10px;
+    box-shadow: none;
+  }
+
+  button {
+    // rotate: 90deg;
+    height: 39px;
+    border-bottom: 1px solid var(--dark);
+  }
+}

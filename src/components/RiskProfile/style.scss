@@ -1,0 +1,43 @@
+.risk-title {
+  color: #666;
+  font-size: 12px;
+  font-weight: bold;
+}
+.risk-slider {
+  display: flex;
+
+  .risk-label {
+    font-size: 12px;
+    padding-top: 26px;
+    font-weight: bold;
+  }
+
+  .risk-slider-container {
+    padding-left: 20px;
+  }
+
+  .risk-slider-content {
+    display: flex;
+    position: relative;
+    padding-right: 20px;
+  }
+
+  .risk-slider-content > div {
+    position: "relative";
+    height: "40px";
+  }
+}
+
+.risk-line {
+  border-left: var(--dark) solid 1px;
+  border-bottom: var(--dark) solid 1px;
+  height: 15px;
+  position: relative;
+  left: -15px;
+  span {
+    rotate: -90deg;
+    float: right;
+    position: relative;
+    left: 8px;
+  }
+}
