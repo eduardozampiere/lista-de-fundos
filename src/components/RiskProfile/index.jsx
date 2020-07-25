@@ -24,7 +24,6 @@ function RiskProfile() {
   const [value, setValue] = useState(1);
 
   function handleClick(e) {
-    console.log(e.currentTarget);
     setValue(e.currentTarget.dataset.value);
   }
 
