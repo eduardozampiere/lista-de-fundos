@@ -28,9 +28,9 @@ function List() {
         //Aplicando filtros
         data = data.filter(
           (el) =>
-            el?.operability?.minimum_initial_application_amount >=
+            el?.operability?.minimum_initial_application_amount <=
               minimumAply &&
-            el?.operability?.retrieval_liquidation_days >= minimumDays &&
+            el?.operability?.retrieval_quotation_days <= minimumDays &&
             el?.simple_name?.search(new RegExp(fundName, "i")) !== -1 &&
             (parseInt(
               el?.specification?.fund_risk_profile?.score_range_order
@@ -116,9 +116,11 @@ function List() {
       </thead>
 
       <tbody>
-        {data?.map((el) => (
-          <Asset data={el} header={specHeaders} />
-        ))}
+        {data.length ? (
+          data?.map((el) => <Asset data={el} header={specHeaders} />)
+        ) : (
+          <td colSpan={9}>Nenhum fundo encontrado com as especificações</td>
+        )}
       </tbody>
     </table>
   );

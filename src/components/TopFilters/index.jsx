@@ -28,7 +28,7 @@ function TopFilters(props) {
         <div>
           <Slider
             title="Aplicação mínima"
-            initial={0}
+            initial={18}
             setFilter={setMinimumAply}
             formatter={(value) => `Até ${formatReal(value)}`}
             values={[
@@ -62,7 +62,7 @@ function TopFilters(props) {
         <div>
           <Slider
             title="Prazo de resgate"
-            initial={0}
+            initial={41}
             setFilter={setMinimumDays}
             formatter={(value) => {
               return `Até ${value} ${value > 1 ? "dias úteis" : "dia util"}`;
