@@ -108,28 +108,30 @@ function List() {
     );
   }
   return (
-    <table className="unstriped list-table">
-      <thead>
-        <tr>
-          <th>Fundo</th>
-          <th>Data da cota</th>
-          <th>Mês (%)</th>
-          <th>Ano (%)</th>
-          <th>12M (%)</th>
-          <th style={{ textAlign: "right" }}>Aplicação mínima</th>
-          <th style={{ textAlign: "center" }}>Prazo do resgate</th>
-          <th>Aplicar</th>
-        </tr>
-      </thead>
+    <section className="card">
+      <table className="unstriped list-table">
+        <thead>
+          <tr>
+            <th>Fundo</th>
+            <th>Data da cota</th>
+            <th>Mês (%)</th>
+            <th>Ano (%)</th>
+            <th>12M (%)</th>
+            <th style={{ textAlign: "right" }}>Aplicação mínima</th>
+            <th style={{ textAlign: "center" }}>Prazo do resgate</th>
+            <th>Aplicar</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {data.length ? (
-          data?.map((el) => <Asset data={el} header={specHeaders} />)
-        ) : (
-          <td colSpan={9}>Nenhum fundo encontrado com as especificações</td>
-        )}
-      </tbody>
-    </table>
+        <tbody>
+          {data.length ? (
+            data?.map((el) => <Asset data={el} header={specHeaders} />)
+          ) : (
+            <td colSpan={9}>Nenhum fundo encontrado com as especificações</td>
+          )}
+        </tbody>
+      </table>
+    </section>
   );
 }
 

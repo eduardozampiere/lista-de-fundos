@@ -74,11 +74,14 @@ function RiskProfile() {
               style={{
                 marginTop: "5px",
                 width: `${value * baseWidth + 4 * (value - 1) + 15}px`,
+                marginBottom: "13px",
               }}
             >
-              <span>
-                <AiFillCaretRight />
-              </span>
+              {value && (
+                <span>
+                  <AiFillCaretRight />
+                </span>
+              )}
             </div>
           </div>
           <div class="risk-label">maior</div>
