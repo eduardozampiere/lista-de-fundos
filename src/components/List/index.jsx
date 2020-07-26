@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Asset from "../Asset";
 import API from "../../api";
 import { useStore } from "../../context/Store";
+import { FaSpinner } from "react-icons/fa";
 
 import "./style.scss";
 function List() {
@@ -98,7 +99,13 @@ function List() {
   }, [minimumAply, minimumDays, fundName, risk]);
 
   if (loading) {
-    return <p>Loading</p>;
+    return (
+      <div className="spinner-div">
+        <span className="spinner-icon">
+          <FaSpinner />
+        </span>
+      </div>
+    );
   }
   return (
     <table className="unstriped list-table">
