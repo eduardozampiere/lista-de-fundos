@@ -3,8 +3,6 @@ import { formatReal, formatPercent, formatDate, colors } from "../../utils";
 import { AiOutlineInfoCircle, AiFillStar } from "react-icons/ai";
 import { TiArrowBack } from "react-icons/ti";
 
-//URL com os dados para o grafico https://minhaconta.orama.com.br/rest-api/fund/{ID_DO_FUNDO}/quotas?period_range=m12
-
 function Asset({ data, header }) {
   function renderHeader() {
     const trsToReturn = [];
@@ -133,9 +131,19 @@ function Asset({ data, header }) {
       <tr data-id={data.id} className="tr-hide">
         <td colSpan={9}>
           <div className="grid-x grid-margin-x">
-            <div className="cell small-6 medium-6 large-6"></div>
+            <div className="cell small-7 medium-7 large-7">
+              <div className="fund-description">
+                <b>Fundo para: </b>
+                {data?.description.target_audience}
+              </div>
 
-            <div className="cell small-6 medium-6 large-6 fund-info">
+              <div className="fund-description">
+                <b>Objetivo: </b>
+                {data?.description.objective}
+              </div>
+            </div>
+
+            <div className="cell small-5 medium-5 large-5 fund-info">
               <div>
                 <b>Cotização da aplicação: </b>
                 {data?.operability?.application_quotation_days_str}
