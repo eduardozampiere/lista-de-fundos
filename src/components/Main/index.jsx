@@ -16,7 +16,7 @@ function Main() {
         </div>
       </div>
 
-      <div className="grid-x grid-margin-x">
+      <div className="grid-x">
         <div className="cell small-12 medium-12 large-9">
           <List />
         </div>

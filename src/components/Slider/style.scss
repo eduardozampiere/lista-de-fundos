@@ -32,17 +32,21 @@
   }
 
   input[type="range"]::-webkit-slider-thumb {
-    background: #fff;
+    // background: #fff;
+    -webkit-appearance: none;
+    background-color: #fff;
     border: solid 4px #505152;
     border-radius: 50%;
+    margin-top: -6px;
     box-shadow: 10px 10px 10px transparent;
     cursor: pointer;
-    width: 9px !important;
-    height: 9px !important;
+    width: 15px !important;
+    height: 15px !important;
   }
 
   input[type="range"]::-webkit-slider-runnable-track {
     height: 3px;
+
     background-image: linear-gradient(#119c9f, #119c9f);
   }
 

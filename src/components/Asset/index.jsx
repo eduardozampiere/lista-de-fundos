@@ -1,45 +1,169 @@
 import React from "react";
 import { formatReal, formatPercent, formatDate, colors } from "../../utils";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-console.log(colors);
-function Asset({ data }) {
-  return (
-    <tr>
-      <td>
-        <div
-          style={{
-            borderLeft: `solid 4px ${
-              colors[
-                parseInt(
-                  data?.specification?.fund_risk_profile?.score_range_order
-                ) - 1
-              ]
-            }`,
-          }}
-        >
-          <div className="fund-name">{data?.simple_name}</div>
+import { AiOutlineInfoCircle, AiFillStar } from "react-icons/ai";
+import { TiArrowBack } from "react-icons/ti";
 
-          <div className="fund-spec">
-            {`${data?.specification?.fund_macro_strategy.name} | 
+//URL com os dados para o grafico https://minhaconta.orama.com.br/rest-api/fund/{ID_DO_FUNDO}/quotas?period_range=m12
+
+function Asset({ data, header }) {
+  function renderHeader() {
+    const trsToReturn = [];
+    const macro = data?.specification?.fund_macro_strategy.name;
+    const main = data?.specification?.fund_main_strategy.name;
+    if (!header.includes(macro)) {
+      header.push(macro);
+      trsToReturn.push(
+        <tr className="tr-spec-header">
+          <td colSpan={9}>{macro}</td>
+        </tr>
+      );
+    }
+
+    if (!header.includes(main)) {
+      header.push(main);
+      trsToReturn.push(
+        <tr className="tr-spec-header">
+          <td colSpan={9}>{main}</td>
+        </tr>
+      );
+    }
+
+    return <>{trsToReturn}</>;
+  }
+
+  function handleAply(e) {
+    e.preventDefault();
+    alert("Investindo no fundo");
+  }
+
+  function handleClick(e, id) {
+    const el = document.querySelector(`[data-id="${id}"]`);
+    el.classList.toggle("tr-hide");
+    console.log(data);
+    return false;
+  }
+
+  function handleMove(e) {
+    const current = e.currentTarget;
+    const info = current.querySelector(".info");
+
+    info.classList.toggle("info-hide");
+  }
+
+  return (
+    <>
+      {renderHeader()}
+      <tr
+        onClick={(e) => handleClick(e, data.id)}
+        className={
+          !data.is_closed_to_capture
+            ? "fund-active asset-row"
+            : "fund-inative asset-row"
+        }
+      >
+        <td>
+          <div
+            style={{
+              borderLeft: `solid 5px ${
+                colors[
+                  parseInt(
+                    data?.specification?.fund_risk_profile?.score_range_order
+                  ) - 1
+                ]
+              }`,
+            }}
+          >
+            <div className="fund-name">
+              {data?.simple_name}
+              {data?.specification?.is_qualified ? (
+                <span
+                  className="badge"
+                  data-tooltip
+                  tabIndex={1}
+                  title="Fundo para investidor qualificado"
+                  data-title="Fundo para investidor qualificado"
+                >
+                  <AiFillStar />
+                </span>
+              ) : (
+                ""
+              )}
+            </div>
+
+            <div className="fund-spec">
+              {`${data?.specification?.fund_macro_strategy.name} | 
             ${data?.specification?.fund_main_strategy.name}`}
+            </div>
           </div>
-        </div>
-      </td>
-      <td>{formatDate(data?.quota_date)}</td>
-      <td>{formatPercent(data?.profitabilities?.month * 100)}</td>
-      <td>{formatPercent(data?.profitabilities?.year * 100)}</td>
-      <td>{formatPercent(data?.profitabilities?.m12 * 100)}</td>
-      <td style={{ textAlign: "right" }}>
-        {formatReal(data?.operability?.minimum_initial_application_amount)}
-      </td>
-      <td style={{ textAlign: "center" }}>
-        <span className="info-icon">
-          <AiOutlineInfoCircle />
-        </span>
-      </td>
-      {/* //{data?.operability?.retrieval_quotation_days_str} */}
-      <td>Aplicar</td>
-    </tr>
+        </td>
+        <td>{formatDate(data?.quota_date)}</td>
+        <td>{formatPercent(data?.profitabilities?.month * 100)}</td>
+        <td>{formatPercent(data?.profitabilities?.year * 100)}</td>
+        <td>{formatPercent(data?.profitabilities?.m12 * 100)}</td>
+        <td style={{ textAlign: "right" }}>
+          {formatReal(data?.operability?.minimum_initial_application_amount)}
+        </td>
+        <td style={{ textAlign: "center" }}>
+          <span
+            className="info-icon"
+            onMouseEnter={handleMove}
+            onMouseLeave={handleMove}
+          >
+            <AiOutlineInfoCircle />
+
+            <div class="info info-hide">
+              {data?.operability?.retrieval_quotation_days_str}
+            </div>
+          </span>
+        </td>
+        {/* //{data?.operability?.retrieval_quotation_days_str} */}
+        <td>
+          <span class="aply-icon" onClick={handleAply}>
+            <TiArrowBack />
+          </span>
+        </td>
+      </tr>
+
+      <tr data-id={data.id} className="tr-hide">
+        <td colSpan={9}>
+          <div className="grid-x grid-margin-x">
+            <div className="cell small-6 medium-6 large-6"></div>
+
+            <div className="cell small-6 medium-6 large-6 fund-info">
+              <div>
+                <b>Cotização da aplicação: </b>
+                {data?.operability?.application_quotation_days_str}
+              </div>
+              <div>
+                <b>Cotização do resgate: </b>
+                {data?.operability?.retrieval_quotation_days_str}
+              </div>
+              <div>
+                <b>Liquidação do resgate: </b>
+                {data?.operability?.retrieval_liquidation_days_str}
+              </div>
+              <div>
+                <b>Taxa de administração: </b>
+                {data?.fees?.administration_fee}
+              </div>
+
+              <div>
+                <button>
+                  <a>Conheça mais sobre esse fundo</a>
+                </button>
+              </div>
+
+              <div>
+                <b>CNPJ do fundo</b>: {data?.cnpj}
+              </div>
+              <div>
+                <b>Nome do gestor</b>: {data?.fund_manager?.name}
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </> //
   );
 }
 

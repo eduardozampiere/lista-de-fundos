@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.scss";
-// import { Container } from './styles';
 
-function Slider({ title, initial, formatter, values }) {
+function Slider({ title, initial, formatter, values, setFilter }) {
   const [value, setValue] = useState(initial);
+
+  useEffect(() => {
+    if (!setFilter) return () => {};
+    setFilter(values[value]);
+  }, [value]);
 
   return (
     <div className="slider-component">

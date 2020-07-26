@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillCaretRight } from "react-icons/ai";
+import { useStore } from "../../context/Store";
+
 import "./style.scss";
 
 function RiskProfile() {
@@ -21,15 +23,28 @@ function RiskProfile() {
     { id: 12, color: "#b51414" },
   ];
 
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(null);
+  const { setRisk } = useStore();
 
   function handleClick(e) {
     setValue(e.currentTarget.dataset.value);
   }
 
+  function cleanRisk() {
+    setValue(null);
+  }
+
+  useEffect(() => {
+    setRisk(value);
+    console.log(value);
+  }, [value]);
+
   return (
     <div className="risk-profile">
-      <span className="risk-title">Perfil de risco de fundo</span>
+      <div className="risk-title">
+        <span>Perfil de risco de fundo</span>
+        <small onClick={cleanRisk}>Limpar</small>
+      </div>
       <div>
         <div className="risk-slider">
           <div class="risk-label">menor</div>
@@ -46,9 +61,10 @@ function RiskProfile() {
                       marginLeft: el.id === 1 ? "0" : "4px",
                       height: `${baseHeight + stepHeight * el.id}px`,
                       marginTop: `${40 - (baseHeight + stepHeight * el.id)}px`,
+                      cursor: "pointer",
                     }}
                     onClick={handleClick}
-                    onMouseEnter={handleClick}
+                    // onMouseEnter={handleClick}
                   />
                 </div>
               ))}

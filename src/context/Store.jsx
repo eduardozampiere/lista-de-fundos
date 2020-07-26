@@ -4,18 +4,25 @@ const StoreContext = createContext();
 
 export default function StoreProvider({ children }) {
   const [filters, setFilters] = useState(null);
-  const [data, setData] = useState(null);
-  const [currentFilters, setCurrentFilters] = useState({});
+
+  const [minimumAply, setMinimumAply] = useState(null);
+  const [minimumDays, setMinimumDays] = useState(null);
+  const [risk, setRisk] = useState(null);
+  const [fundName, setFundName] = useState("");
 
   return (
     <StoreContext.Provider
       value={{
         filters,
         setFilters,
-        data,
-        setData,
-        currentFilters,
-        setCurrentFilters,
+        minimumAply,
+        setMinimumAply,
+        minimumDays,
+        setMinimumDays,
+        fundName,
+        setFundName,
+        risk,
+        setRisk,
       }}
     >
       {children}

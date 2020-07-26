@@ -6,21 +6,40 @@ import { useStore } from "../../context/Store";
 import "./style.scss";
 function List() {
   const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+  const { setFilters, minimumAply, minimumDays, fundName, risk } = useStore();
 
-  const { data, setData, setFilters } = useStore();
-  //profitabilities
-  //quota_date
-  //fund_main_strategy
-  //fund_risk_profile
+  const specHeaders = [];
 
-  //is_qualified
-
-  //operability minimum_initial_aplication_amount
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await API.data();
+        if (
+          typeof minimumAply === "object" ||
+          typeof minimumDays === "object" ||
+          typeof fundName === "object"
+        )
+          return () => {};
+        setLoading(true);
+        console.log(risk);
+        let { data } = await API.data();
         const aux = {};
+
+        //Aplicando filtros
+        data = data.filter(
+          (el) =>
+            el?.operability?.minimum_initial_application_amount >=
+              minimumAply &&
+            el?.operability?.retrieval_liquidation_days >= minimumDays &&
+            el?.simple_name?.search(new RegExp(fundName, "i")) !== -1 &&
+            (parseInt(
+              el?.specification?.fund_risk_profile?.score_range_order
+            ) === parseInt(risk) ||
+              !risk)
+        );
+        console.log(data);
+
+        //Separando filtros de estrategia
         data.map((el) => {
           const macro = el.specification.fund_macro_strategy.name;
           const main = el.specification.fund_main_strategy.name;
@@ -42,6 +61,8 @@ function List() {
         });
 
         setFilters(aux);
+
+        //Ordenando dados por estrategia
         data.sort((a, b) => {
           if (
             a.specification.fund_macro_strategy.id <
@@ -51,6 +72,17 @@ function List() {
           if (
             a.specification.fund_macro_strategy.id >
             b.specification.fund_macro_strategy.id
+          )
+            return -1;
+
+          if (
+            a.specification.fund_main_strategy.id <
+            b.specification.fund_main_strategy.id
+          )
+            return 1;
+          if (
+            a.specification.fund_main_strategy.id >
+            b.specification.fund_main_strategy.id
           )
             return -1;
           return 0;
@@ -63,7 +95,7 @@ function List() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [minimumAply, minimumDays, fundName, risk]);
 
   if (loading) {
     return <p>Loading</p>;
@@ -85,7 +117,7 @@ function List() {
 
       <tbody>
         {data?.map((el) => (
-          <Asset data={el} />
+          <Asset data={el} header={specHeaders} />
         ))}
       </tbody>
     </table>
