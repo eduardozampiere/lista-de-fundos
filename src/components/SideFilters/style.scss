@@ -1,0 +1,52 @@
+.side-filters {
+  // position: sticky;
+  // top: 8px;
+  input[type="checkbox"] {
+    // margin-right: 5px;
+    position: relative;
+    top: 3px;
+  }
+  .filter-group-macro {
+    border-bottom: solid 1px #ccc;
+    .filter-macro {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 6px;
+      align-items: center;
+      label {
+        padding: 10px;
+        font-size: 12px;
+        color: var(--dark);
+      }
+      .icon-expand {
+        cursor: pointer;
+        display: inline-grid;
+        transition: linear 0.1s;
+        height: 16px;
+        width: 16px;
+        &.rotate {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .filter-group-main {
+      label {
+        padding: 10px;
+        font-size: 12px;
+        color: var(--dark);
+      }
+      &.hide-group {
+        display: none;
+      }
+
+      .filter-main {
+        .filter-main-span {
+          display: flex;
+        }
+        padding: 0px 15px;
+        border-bottom: 1px solid #ccc;
+      }
+    }
+  }
+}

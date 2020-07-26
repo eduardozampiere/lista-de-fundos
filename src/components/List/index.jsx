@@ -8,7 +8,14 @@ import "./style.scss";
 function List() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-  const { setFilters, minimumAply, minimumDays, fundName, risk } = useStore();
+  const {
+    setFilters,
+    minimumAply,
+    minimumDays,
+    fundName,
+    risk,
+    mainFilter,
+  } = useStore();
 
   const specHeaders = [];
 
@@ -25,21 +32,6 @@ function List() {
         console.log(risk);
         let { data } = await API.data();
         const aux = {};
-
-        //Aplicando filtros
-        data = data.filter(
-          (el) =>
-            el?.operability?.minimum_initial_application_amount <=
-              minimumAply &&
-            el?.operability?.retrieval_quotation_days <= minimumDays &&
-            el?.simple_name?.search(new RegExp(fundName, "i")) !== -1 &&
-            (parseInt(
-              el?.specification?.fund_risk_profile?.score_range_order
-            ) === parseInt(risk) ||
-              !risk)
-        );
-        console.log(data);
-
         //Separando filtros de estrategia
         data.map((el) => {
           const macro = el.specification.fund_macro_strategy.name;
@@ -60,8 +52,23 @@ function List() {
 
           aux[macro].sub[main].qtd++;
         });
-
         setFilters(aux);
+
+        //Aplicando filtros
+        data = data.filter(
+          (el) =>
+            el?.operability?.minimum_initial_application_amount <=
+              minimumAply &&
+            el?.operability?.retrieval_quotation_days <= minimumDays &&
+            el?.simple_name?.search(new RegExp(fundName, "i")) !== -1 &&
+            (parseInt(
+              el?.specification?.fund_risk_profile?.score_range_order
+            ) === parseInt(risk) ||
+              !risk) &&
+            (mainFilter.includes(el.specification.fund_main_strategy.id) ||
+              mainFilter.length <= 0)
+        );
+        console.log(data);
 
         //Ordenando dados por estrategia
         data.sort((a, b) => {
@@ -96,7 +103,7 @@ function List() {
         setLoading(false);
       }
     })();
-  }, [minimumAply, minimumDays, fundName, risk]);
+  }, [minimumAply, minimumDays, fundName, risk, mainFilter]);
 
   if (loading) {
     return (

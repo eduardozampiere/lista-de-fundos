@@ -148,9 +148,7 @@ function Asset({ data, header }) {
               </div>
 
               <div>
-                <button>
-                  <a>Conheça mais sobre esse fundo</a>
-                </button>
+                <a>Conheça mais sobre esse fundo</a>
               </div>
 
               <div>
