@@ -25,7 +25,7 @@ function TopFilters(props) {
       </div>
 
       <div className="filter-body grid-x grid-margin-x">
-        <div>
+        <div className="cell small-12 medium-12 large-4">
           <Slider
             title="Aplicação mínima"
             initial={18}
@@ -55,11 +55,11 @@ function TopFilters(props) {
           />
         </div>
 
-        <div>
+        <div className="cell small-12 medium-12 large-4">
           <RiskProfile />
         </div>
 
-        <div>
+        <div className="cell small-12 medium-12 large-4">
           <Slider
             title="Prazo de resgate"
             initial={41}

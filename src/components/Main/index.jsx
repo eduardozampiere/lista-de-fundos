@@ -9,12 +9,19 @@ function Main() {
       <div className="grid-x grid-margin-x">
         <div className="cell small-12 medium-12 large-9">
           <TopFilters />
-
-          <List />
         </div>
 
-        <div className="cell small-12 medium-12 large-3">
+        <div
+          className="cell small-12 medium-12 large-3"
+          style={{ position: "relative" }}
+        >
           <SideFilters />
+        </div>
+      </div>
+
+      <div className="grid-x grid-margin-x">
+        <div className="cell small-12 medium-12 large-9">
+          <List />
         </div>
       </div>
     </main>

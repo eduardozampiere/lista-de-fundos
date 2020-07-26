@@ -3,6 +3,13 @@
   --light: #fff;
 }
 
+.grid-x {
+  @media (max-width: 767px) {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -115,11 +115,13 @@ function List() {
     );
   }
   return (
-    <section className="card">
+    <section className="card section-table">
       <table className="unstriped list-table">
         <thead>
           <tr>
-            <th>Fundo</th>
+            <th className="sticky-td">
+              <div>Fundo</div>
+            </th>
             <th>Data da cota</th>
             <th>Mês (%)</th>
             <th>Ano (%)</th>

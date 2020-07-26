@@ -14,7 +14,10 @@ function Asset({ data, header }) {
       header.push(macro);
       trsToReturn.push(
         <tr className="tr-spec-header">
-          <td colSpan={9}>{macro}</td>
+          <td colSpan={1} className="sticky-td">
+            {macro}
+          </td>
+          <td colSpan={8}></td>
         </tr>
       );
     }
@@ -23,7 +26,10 @@ function Asset({ data, header }) {
       header.push(main);
       trsToReturn.push(
         <tr className="tr-spec-header">
-          <td colSpan={9}>{main}</td>
+          <td colSpan={1} className="sticky-td">
+            {main}
+          </td>
+          <td colSpan={8}></td>
         </tr>
       );
     }
@@ -61,7 +67,7 @@ function Asset({ data, header }) {
             : "fund-inative asset-row"
         }
       >
-        <td>
+        <td className="sticky-td">
           <div
             style={{
               borderLeft: `solid 5px ${

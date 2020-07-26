@@ -21,6 +21,9 @@
     width: 50%;
     margin-left: 10px;
     box-shadow: none;
+    @media (max-width: 767px) {
+      width: calc(100% - 35px);
+    }
   }
 
   button {

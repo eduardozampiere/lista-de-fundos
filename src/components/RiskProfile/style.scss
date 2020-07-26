@@ -19,7 +19,10 @@
 
 .risk-slider {
   display: flex;
-
+  justify-content: center;
+  @media (max-width: 767px) {
+    margin: 20px 0;
+  }
   .risk-label {
     font-size: 12px;
     padding-top: 26px;

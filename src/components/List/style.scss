@@ -17,12 +17,23 @@
     animation: spinner 1.2s linear infinite;
   }
 }
+.section-table {
+  overflow: auto !important;
+}
 
 .list-table {
   font-size: 12px;
   color: #333;
   box-shadow: 0 0 4px #ccc !important;
   border-radius: 4px !important;
+  overflow-x: auto;
+  width: 100%;
+  @media (max-width: 767px) {
+    min-width: 800px;
+  }
+  tr {
+    // min-width: 1000px;
+  }
 
   .fund-inative {
     color: #ccc !important;
@@ -30,6 +41,8 @@
 
   tr th {
     color: #333;
+    background-color: #f8f8f8;
+    padding: 0 10px !important;
   }
 
   .badge {
@@ -57,7 +70,7 @@
   }
 
   .tr-spec-header {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5 !important;
     font-weight: bold;
 
     td {
@@ -111,10 +124,30 @@
   tr td > div {
     padding: 8px;
   }
+  .sticky-td {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    & > div {
+      background-color: #fff;
+      // border-right: 1px solid #f4f4f4;
+    }
+    @media (max-width: 767px) {
+      width: 50vw;
+    }
+  }
 
+  th.sticky-td {
+    & > div {
+      padding: 14px 0 !important;
+      background-color: #f8f8f8;
+    }
+  }
   td .fund-name {
     font-weight: bold;
     font-size: 13px;
+    position: sticky;
+    left: 0;
   }
 
   td .fund-spec {

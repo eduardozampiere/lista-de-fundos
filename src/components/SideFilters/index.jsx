@@ -23,9 +23,9 @@ function SideFilters() {
     const subs = filters[macro].sub;
 
     const arr = Object.keys(subs).map((sub) => {
-      const el = (document.querySelector(
+      document.querySelector(
         `.checkbox-main-${subs[sub].id}`
-      ).checked = checked);
+      ).checked = checked;
       return subs[sub].id;
     });
 

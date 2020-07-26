@@ -1,6 +1,11 @@
 .side-filters {
   // position: sticky;
   // top: 8px;
+  position: absolute;
+  // width: 100%;
+  @media (max-width: 767px) {
+    position: relative;
+  }
   input[type="checkbox"] {
     // margin-right: 5px;
     position: relative;
