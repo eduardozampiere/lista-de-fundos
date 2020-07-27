@@ -36,7 +36,6 @@ function RiskProfile() {
 
   useEffect(() => {
     setRisk(value);
-    console.log(value);
   }, [value]);
 
   return (

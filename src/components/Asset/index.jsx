@@ -43,7 +43,6 @@ function Asset({ data, header }) {
   function handleClick(e, id) {
     const el = document.querySelector(`[data-id="${id}"]`);
     el.classList.toggle("tr-hide");
-    console.log(data);
     return false;
   }
 

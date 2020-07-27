@@ -8,9 +8,7 @@ import "./style.scss";
 function SideFilters() {
   const { filters, mainFilter, setMainFilter } = useStore();
 
-  useEffect(() => {
-    console.log(mainFilter);
-  }, [mainFilter]);
+  useEffect(() => {}, [mainFilter]);
 
   function addMacroFilter(e) {
     const current = e.currentTarget;

@@ -29,7 +29,6 @@ function List() {
         )
           return () => {};
         setLoading(true);
-        console.log(risk);
         let { data } = await API.data();
         const aux = {};
         //Separando filtros de estrategia
@@ -68,7 +67,6 @@ function List() {
             (mainFilter.includes(el.specification.fund_main_strategy.id) ||
               mainFilter.length <= 0)
         );
-        console.log(data);
 
         //Ordenando dados por estrategia
         data.sort((a, b) => {
@@ -99,7 +97,6 @@ function List() {
         setData(data);
         setLoading(false);
       } catch (err) {
-        console.log(err);
         setLoading(false);
       }
     })();

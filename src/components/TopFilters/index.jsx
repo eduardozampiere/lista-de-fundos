@@ -8,7 +8,6 @@ import { useStore } from "../../context/Store";
 
 function TopFilters(props) {
   const { setMinimumAply, setMinimumDays, setFundName } = useStore();
-  // console.log(setMinimumAply);
   return (
     <section className="card top-filter" {...props}>
       <div className="filter-header">
