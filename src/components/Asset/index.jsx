@@ -37,7 +37,12 @@ function Asset({ data, header }) {
 
   function handleAply(e) {
     e.preventDefault();
-    alert("Investindo no fundo");
+    console.log(data);
+    if (data.is_closed_to_capture) {
+      alert("Fundo fechado para novos investimentos no momento!");
+    } else {
+      alert("Você acabou de investir no fundo!");
+    }
   }
 
   function handleClick(e, id) {
